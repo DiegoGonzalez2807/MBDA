@@ -247,7 +247,7 @@ DELETE FROM revisa;
 
 
 
-/*Restriccion para correo de proveedor*/
+/*Restriccion para correo de proveedor*/   
 ALTER TABLE proveedor
     ADD CONSTRAINT ck_correo_proveer CHECK ( correo LIKE '%@%'
                                              AND correo LIKE '%.com.co' ); 
@@ -258,7 +258,7 @@ INSERT INTO proveedor VALUES ('PROV1234','968574123','Nodebefuncionar@edu.com');
 
 
 
-/*Restriccion para codigo de proveedor*/
+/*Restriccion para codigo de proveedor*/ 
 ALTER TABLE proveedor ADD CONSTRAINT ck_proveedor_codigo CHECK ( codigo LIKE 'PROV%' ); 
 /*TuplasOK*/
 INSERT INTO proveedor VALUES ('PROV2656','3118569757','ProveedorPrueba1@gmail.com.co');
@@ -269,8 +269,9 @@ INSERT INTO proveedor VALUES ('NOPE1234','968574123', 'Nodebefuncionar@edu.com.c
 
 /*Restriccion para cedula de persona juridica */
 ALTER TABLE persona_juridica
-    ADD CONSTRAINT ck_juridica_cedula CHECK ( length(cedula) = 10 );
+    ADD CONSTRAINT ck_juridica_cedula CHECK ( length(cedula) = 10 );                
 /*TuplasOK*/
+INSERT INTO proveedor VALUES('PROV9659', '3228369584', 'prov1@gmailcom');
 INSERT INTO persona_juridica VALUES ('Diego', 'González', '1007196612', '9685324658', 'PROV9659');
 /*TuplasNoOK*/
 INSERT INTO persona_juridica VALUES ('Cristian', 'Forero', '96532', '9685965658', 'PROV3025');   
@@ -279,9 +280,10 @@ INSERT INTO persona_juridica VALUES ('Cristian', 'Forero', '96532', '9685965658'
 
 /*Restriccion para nit de la persona juridica*/
 ALTER TABLE persona_juridica
-    ADD CONSTRAINT ck_juridica__nit CHECK ( length(nit) = 10 ); 
+    ADD CONSTRAINT ck_juridica__nit CHECK ( length(nit) = 10 );  
 /*TuplasOK*/
-INSERT INTO persona_juridica VALUES ('Juan', 'Castro', '96584632187', '6325982555', 'PROV6354');
+INSERT INTO proveedor VALUES('PROV6354', '6695045', 'Proveedor2@gmail.com');
+INSERT INTO persona_juridica VALUES ('Juan', 'Castro', '9658463187', '6325982555', 'PROV6354');
 /*TuplasNoOK*/
 INSERT INTO persona_juridica VALUES ('Julian', 'Gonzalez', '9654329856', '9658742', 'PROV5698');   
 
@@ -290,6 +292,7 @@ INSERT INTO persona_juridica VALUES ('Julian', 'Gonzalez', '9654329856', '965874
 /*Restriccion para codigo de persona juridica*/
 ALTER TABLE persona_juridica ADD CONSTRAINT ck_juridica_codigo CHECK ( codigo LIKE 'PROV%' ); 
 /*TuplasOK*/
+INSERT INTO proveedor VALUES('PROV6158', '3695862518', 'Proveedor3@gmail.com');
 INSERT INTO persona_juridica VALUES ('Danilo', 'Jurista', '9862542259', '9523641877', 'PROV6158');
 /*TuplasNoOK*/
 INSERT INTO persona_juridica VALUES ('Sofia', 'Gualteros', '9955446852', '2266551189', 'NOPE9526');  
@@ -298,9 +301,10 @@ INSERT INTO persona_juridica VALUES ('Sofia', 'Gualteros', '9955446852', '226655
 
 /*Restriccion para nit de la empresa*/
 ALTER TABLE empresa
-    ADD CONSTRAINT ck_empresa_nit CHECK ( length(nit) = 10 ); 
+    ADD CONSTRAINT ck_empresa_nit CHECK ( length(nit) = 10 );  
 /*TuplasOK*/
-INSERT INTO empresa VALUES ('Sociedad de abogados SAS ', '9862542259','PROV6158', 'Carrera 5 sur numero 98-569', 'Bogotá', '500001');
+INSERT INTO proveedor VALUES('PROV6120', '3229568471', 'Proveedor4@gmail.com');
+INSERT INTO empresa VALUES ('Sociedad de abogados SAS ', '9862542259','PROV6158', 'Carrera 5 sur numero 98-569', 'Bogotá', '500001'); 
 /*TuplasNoOK*/
 INSERT INTO empresa VALUES ('CODENSA SAS', '265874','PROV7584', 'Calle 9na numero 98-254', 'Bogotá', '500001');	
 
@@ -309,14 +313,15 @@ INSERT INTO empresa VALUES ('CODENSA SAS', '265874','PROV7584', 'Calle 9na numer
 /*Restriccion para codigo de la empresa*/
 ALTER TABLE empresa ADD CONSTRAINT ck_empresa_codgio CHECK ( codigo LIKE 'PROV%' ); 
 /*TuplasOK*/
-INSERT INTO empresa VALUES ('Empresa Nuevos Ingenieros', '27497223894','PROV6158', 'Calle novena numero 15-98', 'Villavicencio', '500004');
+INSERT INTO proveedor VALUES('PROV6140', '3158654069', 'Proveedor5@gmail.com');
+INSERT INTO empresa VALUES ('Empresa Nuevos Ingenieros', '27497223894','PROV6140', 'Calle novena numero 15-98', 'Villavicencio', '500004');
 /*TuplasNoOK*/
 INSERT INTO empresa VALUES ('Proveedor ECI libros', '7394057623','NOPE9674', 'Calle 230 norte numero 25-100', 'Bogotá', '100001');	
 
 
 
-/*Restriccion para nombre de la bodega*/
-ALTER TABLE bodega ADD CONSTRAINT ck_bodega_nombre CHECK ( nombre_bodega LIKE 'Bodega %' ); 
+/*Restriccion para nombre de la bodega*/  SI CORRE
+ALTER TABLE bodega ADD CONSTRAINT ck_bodega_nombre CHECK ( nombre_bodega LIKE 'Bodega%' ); 
 /*TuplasOK*/
 INSERT INTO bodega VALUES ('Bodega Chichimene', 'Villavicencio', 'Meta');
 /*TuplasNoOK*/
@@ -324,7 +329,7 @@ INSERT INTO bodega VALUES ('Centro de mercado San Fernando', 'San José', 'Guavi
 
 
 
-/*Restriccion de cargos en empleado*/
+/*Restriccion de cargos en empleado*/ SI CORRE
 ALTER TABLE empleado
     ADD CONSTRAINT ck_cargo CHECK ( cargo IN (
         'TECNICO ERA 1',
@@ -340,31 +345,31 @@ INSERT INTO empleado VALUES ('Carlos', 'Fernandez', 'E000598', 'CEO PETROL INVEN
 
 
 	
-/*Restriccion de correo en empleado*/
+/*Restriccion de correo en empleado*/si corre
 ALTER TABLE empleado
     ADD CONSTRAINT ck_empleado_correo CHECK ( correo LIKE ( '%@petrolinventories.com.co' ) );
 /*TuplasOK*/
-INSERT INTO empleado VALUES ('Gonzalo', 'Pistacho', 'E0002547', 'TECNICO ERA 1', 'gonzalo.pistacho@petrolinventories.com.co', 'Ext. 9584621', 'Pozos petroleros', '1000589652');
+INSERT INTO empleado VALUES ('Gonzalo', 'Pistacho', 'E000254', 'TECNICO ERA 1', 'gonzalo.pistacho@petrolinventories.com.co', 'Ext. 9584621', 'Pozos petroleros', '1000589652');
 /*TuplasNoOK*/
 INSERT INTO empleado VALUES ('Jairo', 'Beltran', 'E000269', 'TECNICO ERA 2', 'carlos.fernandez@gmail.com', 'Ext. 9612587', 'Pozos petroleros', '526487166');
 
 
 	
-/*Restriccion de departamento en empleado*/
+/*Restriccion de departamento en empleado*/si corre
 ALTER TABLE empleado
     ADD CONSTRAINT ck_empleado_depto CHECK ( departamento_trabajo IN (
-        'Pozos Petroleros'
+        'Pozos petroleros'
     ) ); 
 /*TuplasOK*/
-INSERT INTO empleado VALUES ('Sofia', 'Gualteros', 'E000532', 'INGENIERO PETROLERO POZO', 'sofia.gualteros@petrolinventories.com.co', 'Ext. 91664852', 'Pozos petroleros', '5262300015');
+INSERT INTO empleado VALUES ('Sofia', 'Gualteros', 'E000532', 'INGENIERO PETROLERO POZO', 'sofia.gualteros@petrolinventories.com.co', 'Ext. 91664852', 'Pozos Petroleros', '5262300015');
 /*TuplasNoOK*/
-INSERT INTO empleado VALUES ('Adolfo', 'Jimenez', 'E000614', 'TECNICO ERA 2', 'adolfo.jimenez@petrolinventories.com.co', 'Ext. 826481', 'Corporativo', '16588823654');
+INSERT INTO empleado VALUES ('Adolfo', 'Jimenez', 'E000614', 'TECNICO ERA 2', 'adolfo.jimenez@petrolinventories.com.co', 'Ext. 826481', 'Corporativo', '1658882365');
 
 
 	
 /*Restriccion de id de empleado*/
 ALTER TABLE empleado
-    ADD CONSTRAINT ck_empleado_id CHECK ( substr(id, 0, 3) = 'E000' ); 
+    ADD CONSTRAINT ck_empleado_id CHECK ( id LIKE 'E000%' );     
 /*TuplasOK*/
 INSERT INTO empleado VALUES ('Jose', 'Valdiri', 'E000555', 'INGENIERO PETROLERO POZO', 'jose.valdiri@petrolinventories.com.co', 'Ext. 9164888', 'Pozos petroleros', '2229995684');
 /*TuplasNoOK*/
@@ -374,7 +379,7 @@ INSERT INTO empleado VALUES ('Ana', 'Vizcaino', 'E012614', 'TECNICO ERA 2', 'ana
 	
 /*Restriccion de cedula de empleado*/
 ALTER TABLE empleado
-    ADD CONSTRAINT ck_empleado_cedula CHECK ( length(cedula) = 10 ); /*Restriccion de cedula de empleado*/
+    ADD CONSTRAINT ck_empleado_cedula CHECK ( length(cedula) = 10 ); 
 /*TuplasOK*/
 INSERT INTO empleado VALUES ('Luis', 'Gonzalez', 'E000951', 'TECNICO ERA 1', 'luis.gonzalez@petrolinventories.com.co', 'Ext. 96652418', 'Pozos petroleros', '1596358788');
 /*TuplasNoOK*/
@@ -385,12 +390,15 @@ INSERT INTO empleado VALUES ('Alejandra', 'Parra', 'E000962', 'TECNICO ERA 2', '
 /*Restriccion de departamento de experto*/
 ALTER TABLE experto
     ADD CONSTRAINT ck_experto_dpto CHECK ( departamento_experiencia IN (
-        'Pozos Petroleros'
+        'Pozos petroleros'
     ) ); 
 /*TuplasOK*/
-INSERT INTO empleado VALUES ('E100985','Pozos petroleros');
+INSERT INTO empleado VALUES('Luisa', 'Novoa', 'E100985', 'TECNICO ERA 1', 'luisa.novoa@petrolinventories.com.co', '3115869541', 'Pozos petroleros', '9563255874');
+INSERT INTO experto VALUES ('E100985','Pozos petroleros');
 /*TuplasNoOK*/
-INSERT INTO empleado VALUES ('E100521','Corporativos');
+INSERT INTO empleado VALUES('Samuel', 'Novoa', 'E100025', 'TECNICO ERA 1', 'samuel.novoa@petrolinventories.com.co', '3586259854', 'Pozos petroleros', '8822302541');
+INSERT INTO experto VALUES ('E100025','Corporativos');
+	
 	
 
 
@@ -398,9 +406,11 @@ INSERT INTO empleado VALUES ('E100521','Corporativos');
 ALTER TABLE experto
     ADD CONSTRAINT ck_experto_id CHECK ( substr(id, 0, 3) = 'E100' ); 
 /*TuplasOK*/
-INSERT INTO empleado VALUES ('E100985','Pozos petroleros');
+INSERT INTO empleado VALUES('Andres', 'Marshall', 'E100626', 'TECNICO ERA 1', 'andres.marshall@petrolinventories.com.co', '3692655858', 'Pozos petroleros', '2596363547');
+INSERT INTO experto VALUES ('E100626','Pozos petroleros');
 /*TuplasNoOK*/
-INSERT INTO empleado VALUES ('E001521','Pozos petroleros');	
+INSERT INTO empleado VALUES('Nicanor', 'Parra', 'E001521', 'TECNICO ERA 1', 'nicanor.parra@petrolinventories.com.co', '3216857979', 'Pozos petroleros', '2599633587');
+INSERT INTO experto VALUES ('E001521','Pozos petroleros');	
 
 
 	
@@ -414,8 +424,12 @@ ALTER TABLE estado
         'P'
     ) ); 
 /*TuplasOK*/
-INSERT INTO estado VALUES (1265987, 'E100924', 196587, 'E', 'Pieza en buen estado');
+INSERT INTO experto VALUES('E100924', 'Pozos Petroleros');
+INSERT INTO pieza_extraccion_petrolera VALUES(1265987, 'Engranajes', '3mm x 5mm x 8mm');
+INSERT INTO estado VALUES (1652598, 'E100924', 1265987, 'E', 'Pieza en buen estado');
 /*TuplasNoOK*/
+INSERT INTO experto VALUES('E100222', 'Pozos Petroleros');
+INSERT INTO pieza_extraccion_petrolera VALUES(665544, 'Engranajes', '3mm x 5mm x 8mm');
 INSERT INTO estado VALUES (1625875, 'E100222', 665544, 'I', 'Pieza en buen estado');	
 
 
@@ -427,9 +441,16 @@ ALTER TABLE permiso
         'No Aceptado'
     ) ); 
 /*TuplasOK*/
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Cristian', 'Forero', 'E000986', 'TECNICO ERA 1', 'cristian.forero@petrolinventories.com.co', '3259160505', 'Pozos petroleros', '6157474851');
+INSERT INTO pieza_extraccion_petrolera VALUES(965244, 'Engranajes', '3mm x 5mm x 8mm');
 INSERT INTO permiso VALUES (1265987, 'E000986', 965244, 'Se necesita pieza para extraccion petrolera', 'Aceptado', 9988526);
+INSERT INTO pedido_pieza VALUES(9988526, 'E000986', 'Pozos petroleros', 25, 'Aceptado', 'Bodega Chichimene');
 /*TuplasNoOK*/
-INSERT INTO permiso VALUES (5599228, 'E000228', 955568, 'Se necesita pieza para extraccion petrolera', 'No dado', null);
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Santiago', 'Fetecua', 'E000228', 'TECNICO ERA 2', 'santiago.fetecua@petrolinventories.com.co', '3958415050', 'Pozos petroleros', '9258541021');
+INSERT INTO pieza_extraccion_petrolera VALUES(955568, 'Engranajes', '3mm x 5mm x 8mm');
+INSERT INTO permiso VALUES (5599228, 'E000228', 955568, 'Se necesita pieza para extraccion petrolera en pozo 46', 'No dado', null);  
 
 
 
@@ -437,9 +458,13 @@ INSERT INTO permiso VALUES (5599228, 'E000228', 955568, 'Se necesita pieza para 
 ALTER TABLE permiso
 	ADD CONSTRAINT ck_autor_permiso CHECK ( substr(id_autor, 0, 3) = 'E000' );
 /*TuplasOK*/
-INSERT INTO permiso VALUES (1265987, 'E000111', 885522, 'Se necesita pieza para pozo numero 20 Chichimene', 'Aceptado', 6644775);
+INSERT INTO empleado VALUES('Jose', 'Gonzalez', 'E000111', 'TECNICO ERA 2', 'jose.gonzalez@petrolinventories.com.co', '3256548795', 'Pozos petroleros', '2541111698');
+INSERT INTO pieza_extraccion_petrolera VALUES(625140, 'Engranajes', '3mm x 5mm x 8mm');
+INSERT INTO permiso VALUES (9561204, 'E000111', 625140, 'Se necesita pieza para pozo numero 67 Chichimene', 'No Aceptado', null);
 /*TuplasNoOK*/
-INSERT INTO permiso VALUES (9922001, 'E123556', 663354, 'Se necesita pieza para extraccion petrolera', 'Aceptado', 8866225);
+INSERT INTO empleado VALUES('Amalia', 'Lara', 'E123556', 'TECNICO ERA 2', 'amalia.lara@petrolinventories.com.co', '3025629874', 'Pozos petroleros', '9516200014');
+INSERT INTO pieza_extraccion_petrolera VALUES(608522, 'Engranajes', '3mm x 5mm x 8mm');
+INSERT INTO permiso VALUES (025184, 'E123556', 608522, 'Se necesita pieza para extraccion petrolera', 'No Aceptado', null);
 
 
 
@@ -447,19 +472,27 @@ INSERT INTO permiso VALUES (9922001, 'E123556', 663354, 'Se necesita pieza para 
 ALTER TABLE pedido_pieza
     ADD CONSTRAINT ck_autor_pedido_pieza CHECK ( substr(id_autor, 0, 3) = 'E000' );
 /*TuplasOK*/
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Santiago', 'Castellanos', 'E000669', 'TECNICO ERA 1', 'santiago.castellanos@petrolinventories.com.co', '3985642101', 'Pozos petroleros', '9992225687');
 INSERT INTO pedido_pieza VALUES (9154877, 'E000669', 'Pozos petroleros', '1500', 'Bodega Chichimene');
 /*TuplasNoOK*/
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Frank', 'Sinatra', 'E159666', 'TECNICO ERA 1', 'frank.sinatra@petrolinventories.com.co', '3584565252', 'Pozos petroleros', '1699963254');
 INSERT INTO pedido_pieza VALUES (2299885, 'E159666', 'Pozos petroleros', '1234', 'Bodega Chichimene');	
 
 
 
 /*Restriccion de bodegas en pedido*/
 ALTER TABLE pedido_pieza 
-	ADD CONSTRAINT ck_bodega_pedido CHECK( bodega_reclamo LIKE 'Bodega %' );
+	ADD CONSTRAINT ck_bodega_pedido CHECK( bodega_reclamo LIKE 'Bodega%' );
 /*TuplasOK*/
-INSERT INTO pedido_pieza VALUES (0065874, 'E000670', 'Pozos petroleros', '1600', 'Bodega Chichimene');
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Diego', 'Forero', 'E000670', 'TECNICO ERA 1', 'diego.forero@petrolinventories.com.co', '3118569541', 'Pozos petroleros', '8552526587');
+INSERT INTO pedido_pieza VALUES (0065874, 'E000670', 'Pozos petroleros', '1600', 'Aceptado', 'Bodega Chichimene');
 /*TuplasNoOK*/
-INSERT INTO pedido_pieza VALUES (2299885, 'E000956', 'Pozos petroleros', '1235', 'Centro Chichimene');
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Luisa', 'Gualteros', 'E000956', 'TECNICO ERA 2', 'luisa.gualteros@petrolinventories.com.co', '3158569696', 'Pozos petroleros', '2226669510');
+INSERT INTO pedido_pieza VALUES (2299885, 'E000956', 'Pozos petroleros', '1235', 'Aceptado', 'Centro Chichimene');
 
 
 /*Restriccion de departamento para pedidos*/
@@ -468,13 +501,17 @@ ALTER TABLE pedido_pieza
         'Pozos Petroleros'
     ) ); 	
 /*TuplasOK*/
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Andres', 'Quintero', 'E000533', 'TECNICO ERA 1', 'andres.quintero@petrolinventories.com.co', '3205148795', 'Pozos petroleros', '9563215444');
 INSERT INTO pedido_pieza VALUES (1159865, 'E000533', 'Pozos petroleros', '1600', 'Bodega Chichimene');
 /*TuplasNoOK*/
+INSERT INTO bodega VALUES('Bodega Chichimene', 'Villavicencio', 'Meta');
+INSERT INTO empleado VALUES('Maria', 'Suarez', 'E000225', 'TECNICO ERA 2', 'mariasuarez@petrolinventories.com.co', '3659856547', 'Pozos petroleros', '9555584710');
 INSERT INTO pedido_pieza VALUES (9936547, 'E000225', 'Corporativo', '1235', 'Bodega Chichimene');
 
 
 	
-/*Restriccion de tipos de pieza*/	
+/*Restriccion de tipos de pieza*/	si corre
 ALTER TABLE pieza_extraccion_petrolera
     ADD CONSTRAINT ck_pieza_tipo CHECK ( tipo IN (
         'Engranajes',
@@ -487,7 +524,6 @@ ALTER TABLE pieza_extraccion_petrolera
 INSERT INTO pieza_extraccion_petrolera VALUES (956854, 'Engranajes', '3mm x 5mm x 8mm');
 /*TuplasNoOK*/
 INSERT INTO pieza_extraccion_petrolera VALUES (965874, 'Pozos pruebas', '5mm x 8mm x 11mm');
-
 
 
 /*=========================================PROCEDIMENTALES=====================================*/
