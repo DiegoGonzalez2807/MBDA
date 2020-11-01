@@ -86,7 +86,8 @@ CREATE TABLE pedido_pieza (
     cantidad_piezas       NUMBER(5) NOT NULL,
     estado                VARCHAR(13) NOT NULL,
     bodega_reclamo        VARCHAR(20) NOT NULL,
-    fecha_pedido          DATE NOT NULL
+    fecha_pedido          DATE NOT NULL,
+    llegada               DATE NOT NULL
 );
 
 CREATE TABLE pieza_extraccion_petrolera (
