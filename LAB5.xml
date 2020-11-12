@@ -348,3 +348,24 @@ C.
 
 10. Return course numbers of courses that have the same title as some other course. 
 	Course_Catalog/Department/Course[Count(../Course/Title) > 2]/@Number
+	
+	
+	
+11. Return the courses numbers of courses that have no lecturers as instructors. (*)(10)	
+	Course_Catalog/Department/Course[not(Instructors/Lecturer)]/@Number
+	
+	
+12. Return titles of courses taught by the chair of a department. For this question, you may assume that all
+professors have distinct last names. (1)
+	Course_Catalog/Department/Course[../../Department/Chair/Professor/Last_Name/text() = Instructors/Professor/Last_Name/text()]/Title/text()
+	
+	
+	
+13. Return titles of courses taught by a professor with the last name "Ng" and by a professor with the last
+name "Thrun". (*)(1)
+	Course_Catalog/Department/Course[Instructors//Last_Name = "Ng" and Instructors//Last_Name = "Thrun" ]/Title/text()
+	
+	
+	
+14. Return course numbers of courses that have a course taught by Eric Roberts as a prerequisite. (4)
+	Course_Catalog/Department/Course[Prerequisites/Prereq =../../Department/Course[Instructors//First_Name = 'Eric' and Instructors//Last_Name = 'Roberts']/@Number]/@Number
