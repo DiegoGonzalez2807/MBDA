@@ -207,6 +207,83 @@
 			</Prerequisites>
 		</Course>
 	</Department>
+	<Department Code="SE">
+		<Title>Systems Engineering</Title>
+		<Chair>
+			<Professor>
+				<First_Name>Oswaldo</First_Name>
+				<Middle_Initial>C.</Middle_Initial>
+				<Last_Name>Navetty</Last_Name>
+			</Professor>
+		</Chair>
+		<Course Number="POOB" Enrollment="20">
+			<Title>Programacion Orientada a Objetos</Title>
+			<Description>El paradigma orientado a objetos ha mostrado ser útil en el desarrollo de artefactos software correctos y extensibles; hoy en día es un estándar de la industria del software con creciente cantidad de adeptos y con un futuro promisorio en las disciplinas de la computación. Los futuros ingenieros de sistemas deben estudiar y manejar hábilmente sus conceptos, técnicas y metodologías; comprender sus ventajas y desventajas; y saber utilizar las tecnologías informáticas asociadas con este paradigma.</Description>
+			<Instructors>
+				<Professor>
+					<First_Name>Rodrigo</First_Name>
+					<Middle_Initial>H.</Middle_Initial>
+					<Last_Name>Gualteros</Last_Name>
+				</Professor>
+				<Professor>
+					<First_Name>Dagoberto</First_Name>
+					<Middle_Initial>B.</Middle_Initial>
+					<Last_Name>Garzon</Last_Name>
+				</Professor>
+				<Lecturer>
+					<First_Name>Maria</First_Name>
+					<Middle_Initial>I.</Middle_Initial>
+					<Last_Name>Diaz</Last_Name>
+				</Lecturer>
+			</Instructors>
+			<Prerequisites>
+				<Prereq>AYED</Prereq>
+			</Prerequisites>
+		</Course>
+		<Course Number="MBDA" Enrollment="22">
+			<Title>Modelos y Bases de Datos</Title>
+			<Description>Las bases de datos son componentes esenciales de los sistemas de información de las organizaciones y actualmente la gran mayoría de las mismas están sobre sistemas de bases de datos relacionales. Los estudiantes de ingeniería de sistemas deben adquirir los conocimientos y desarrollar las habilidades que les permitan diseñar modelos conceptuales de datos para las organizaciones, construir bases de datos relacionales correspondientes a modelos conceptuales definidos y manejar con propiedad un motor de bases de datos relacional.</Description>
+			<Instructors>
+				<Professor>
+					<First_Name>Fredy</First_Name>
+					<Middle_Initial>H.</Middle_Initial>
+					<Last_Name>Diaz</Last_Name>
+				</Professor>
+				<Professor>
+					<First_Name>Laura</First_Name>
+					<Middle_Initial>C.</Middle_Initial>
+					<Last_Name>Herrera</Last_Name>
+				</Professor>
+				<Lecturer>
+					<First_Name>Maria</First_Name>
+					<Middle_Initial>I.</Middle_Initial>
+					<Last_Name>Diaz</Last_Name>
+				</Lecturer>
+			</Instructors>
+			<Prerequisites>
+				<Prereq>LCAT</Prereq>
+				<Prereq>AYPR</Prereq>
+			</Prerequisites>
+		</Course>
+		<Course Number="AYED" Enrollment="25">
+			<Title>Algoritmos y Estructura de Datos</Title>
+			<Instructors>
+				<Professor>
+					<First_Name>Sebastian</First_Name>
+					<Middle_Initial>C.</Middle_Initial>
+					<Last_Name>Reyes</Last_Name>
+				</Professor>
+				<Lecturer>
+					<First_Name>Sebastian</First_Name>
+					<Middle_Initial>C.</Middle_Initial>
+					<Last_Name>Reyes</Last_Name>
+				</Lecturer>
+			</Instructors>
+			<Prerequisites>
+				<Prereq>AYPR</Prereq>
+			</Prerequisites>
+		</Course>
+	</Department>
 </Course_Catalog>
 
 
@@ -369,3 +446,27 @@ name "Thrun". (*)(1)
 	
 14. Return course numbers of courses that have a course taught by Eric Roberts as a prerequisite. (4)
 	Course_Catalog/Department/Course[Prerequisites/Prereq =../../Department/Course[Instructors//First_Name = 'Eric' and Instructors//Last_Name = 'Roberts']/@Number]/@Number
+
+
+
+DTD
+<?xml version="1.0"?>
+<!DOCTYPE Course_Catalog [
+	<!ELEMENT Course_Catalog (Department*)>
+	<!ELEMENT Department (Title, Chair, Course*)>
+	<!ATTLIST Department Code ID #REQUIRED>
+	<!ELEMENT Title (#PCDATA)>
+	<!ELEMENT Chair (Professor)>
+	<!ELEMENT Professor (First_Name,Middle_Initial?,Last_Name)>
+	<!ELEMENT First_Name (#PCDATA)>
+	<!ELEMENT Middle_Initial (#PCDATA)>
+	<!ELEMENT Last_Name (#PCDATA)>
+	<!ELEMENT Course (Title, Description?, Instructors,Prerequisites?)>
+	<!ATTLIST Course Number ID #REQUIRED>
+	<!ATTLIST Course Enrollment CDATA #IMPLIED>
+	<!ELEMENT Description (#PCDATA)>
+	<!ELEMENT Instructors (Professor*,Lecturer*)>
+	<!ELEMENT Lecturer (First_Name,Middle_Initial?,Last_Name)> 
+	<!ELEMENT Prerequisites (Prereq*)>
+	<!ELEMENT Prereq (#PCDATA)>
+]>
