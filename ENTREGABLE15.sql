@@ -1,12 +1,77 @@
+/*Eliminar datos*/
+DELETE FROM proveedor;
+
+DELETE FROM persona_natural;
+
+DELETE FROM empresa;
+
+DELETE FROM provee;
+
+DELETE FROM bodega;
+
+DELETE FROM inventario;
+
+DELETE FROM contiene;
+
+DELETE FROM empleado_directo;
+
+DELETE FROM empleado;
+
+DELETE FROM experto;
+
+DELETE FROM estado;
+
+DELETE FROM permiso;
+
+DELETE FROM pedido_pieza;
+
+DELETE FROM pieza_extraccion_petrolera;
+
+DELETE FROM revisa;
+
+
+/*ELIMINAR TABLAS*/
+
+DROP TABLE contiene CASCADE CONSTRAINTS;
+
+DROP TABLE empleado_directo CASCADE CONSTRAINTS;
+
+DROP TABLE proveedor CASCADE CONSTRAINTS;
+
+DROP TABLE persona_natural CASCADE CONSTRAINTS;
+
+DROP TABLE empresa CASCADE CONSTRAINTS;
+
+DROP TABLE provee CASCADE CONSTRAINTS;
+
+DROP TABLE bodega CASCADE CONSTRAINTS;
+
+DROP TABLE inventario CASCADE CONSTRAINTS;
+
+DROP TABLE empleado CASCADE CONSTRAINTS;
+
+DROP TABLE experto CASCADE CONSTRAINTS;
+
+DROP TABLE estado CASCADE CONSTRAINTS;
+
+DROP TABLE permiso CASCADE CONSTRAINTS;
+
+DROP TABLE pedido_pieza CASCADE CONSTRAINTS;
+
+DROP TABLE pieza_extraccion_petrolera CASCADE CONSTRAINTS;
+
+DROP TABLE revisa CASCADE CONSTRAINTS;
+
+
 /*CREACION DE TABLAS*/
 
 CREATE TABLE proveedor (
     codigo            VARCHAR(8) NOT NULL,
     telefono          VARCHAR(10) NOT NULL,
     correo            VARCHAR(250) NOT NULL,
-    direccion         VARCHAR(100) NOT NULL,            /*Refactorizacion en creacion de tablas*/
-    ciudad            VARCHAR(50) NOT NULL,				/*Se crean dos nuevas tablas (CONTIENE, EMPLEADO_DIRECTO)*/
-    direccion_postal  VARCHAR(250),						/*7 atributos se crean de forma XMLTYPE*/
+    direccion         VARCHAR(100) NOT NULL,
+    ciudad            VARCHAR(50) NOT NULL,
+    direccion_postal  VARCHAR(250),
     años_experiencia  VARCHAR(30) NOT NULL
 );
 
